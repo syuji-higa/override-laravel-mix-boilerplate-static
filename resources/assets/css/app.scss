@@ -1,12 +1,12 @@
 @import "~sanitize.css";
 
-@import "./setting.scss";
-@import "./function.scss";
-@import "./easing.scss";
-// @import "./keyframes.scss";
+@import "./setting";
+@import "./function";
+@import "./easing";
+// @import "./keyframes";
 
-@import "./mixins/layout.scss";
-@import "./mixins/media-screen.scss";
-@import "./mixins/size.scss";
+@import "./mixins/layout";
+@import "./mixins/media-screen";
+@import "./mixins/size";
 
-@import "./base.scss";
+@import "./base";
