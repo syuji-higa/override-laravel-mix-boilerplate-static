@@ -1,0 +1,23 @@
+@function get-ratio-size($size, $base-size) {
+  @return $size / $base-size;
+}
+
+@function get-percent-size($size, $base-size) {
+  @return get-ratio-size($size, $base-size) * 100%;
+}
+
+@function grid-pc($num, $parent-num: $grid-split-pc) {
+  @return (100% / $grid-split-pc * $num) / (1 / $grid-split-pc * $parent-num);
+}
+
+@function grid-sp($num, $parent-num: $grid-split-sp) {
+  @return (100% / $grid-split-sp * $num) / (1 / $grid-split-sp * $parent-num);
+}
+
+@function contents-grid-pc($num) {
+  @return grid-pc($num, $grid-split-pc - $contents-grid-margin-pc * 2);
+}
+
+@function contents-grid-sp($num) {
+  @return grid-sp($num, $grid-split-sp - $contents-margin-sp * 2);
+}

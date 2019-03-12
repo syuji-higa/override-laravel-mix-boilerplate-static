@@ -1,0 +1,35 @@
+@mixin media-screen-pc {
+  @media screen and (min-width: $break-point-tb) {
+    @content;
+  }
+}
+
+@mixin media-screen-sp {
+  @media screen and (max-width: $break-point-tb - .001px) {
+    @content;
+  }
+}
+
+@mixin media-screen-tb {
+  @media (min-width: $break-point-tb) and (max-width: $break-point-pc - .001px) {
+    @content;
+  }
+}
+
+@mixin media-screen-pl {
+  @media screen and (min-width: $break-point-pc) {
+    @content;
+  }
+}
+
+@mixin media-screen-mo {
+  @media screen and (max-width: $break-point-pc - .001px) {
+    @content;
+  }
+}
+
+@mixin media-screen-ls {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
