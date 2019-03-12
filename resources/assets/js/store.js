@@ -13,6 +13,7 @@ const state = {
   breakPoint: [768, 1024],
   windowWidth: 0,
   windowHeight: 0,
+  windowWidthLastChangedHeight: 0,
   windowSizeType: ''
 }
 
@@ -23,21 +24,15 @@ const mutations = {
   setWindowHeight(state, data) {
     state.windowHeight = data
   },
+  setWindowWidthLastChangedHeight(state, data) {
+    state.windowWidthLastChangedHeight = data
+  },
   setWindowSizeType(state, data) {
     state.windowSizeType = data
   }
 }
 
-const actions = {
-  async setWindowWidth(context, data) {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        context.commit('setWindowWidth', data)
-        resolve()
-      }, 1000)
-    })
-  }
-}
+const actions = {}
 
 const vanix = new Vanix({ state, mutations, actions })
 

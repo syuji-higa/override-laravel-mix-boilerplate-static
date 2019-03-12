@@ -1,3 +1,3 @@
 import { windowSizeObserver } from './module'
 
-windowSizeObserver.add().resize()
+windowSizeObserver.on().resize()

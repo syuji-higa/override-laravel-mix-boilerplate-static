@@ -21,7 +21,7 @@ class WindowSizeObserver {
   /**
    * @return {Instance}
    */
-  add() {
+  on() {
     this._resizeEvent.add()
     return this
   }
@@ -29,7 +29,7 @@ class WindowSizeObserver {
   /**
    * @return {Instance}
    */
-  remove() {
+  off() {
     this._resizeEvent.remove()
     return this
   }
@@ -40,6 +40,10 @@ class WindowSizeObserver {
   resize() {
     store.commit('setWindowWidth', window.innerWidth)
     store.commit('setWindowHeight', window.innerHeight)
+
+    if (!this._isMobile || store.state.windowWidth !== window.innerWidth) {
+      store.commit('setWindowWidthLastChangedHeight', window.innerHeight)
+    }
 
     if (store.state.breakPoint[0] > store.state.windowWidth) {
       if (store.state.windowSizeType !== 'mobile') {
@@ -55,25 +59,11 @@ class WindowSizeObserver {
       }
     }
 
-    document.dispatchEvent(
-      new CustomEvent('resize', {
-        detail: {
-          size: {
-            width: store.state.windowWidth,
-            height: store.state.windowHeight
-          },
-          type: store.state.windowSizeType
-        }
-      })
-    )
-
     return this
   }
 
   _onResize() {
-    if (!this._isMobile || store.state.windowWidth !== window.innerWidth) {
-      this._resizeDebounce(this.resize.bind(this))
-    }
+    this._resizeDebounce(this.resize.bind(this))
   }
 }
 
