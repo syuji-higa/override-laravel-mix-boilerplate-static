@@ -41,7 +41,10 @@ class WindowSizeObserver {
     store.commit('setWindowWidth', window.innerWidth)
     store.commit('setWindowHeight', window.innerHeight)
 
-    if (!this._isMobile || store.state.windowWidth !== window.innerWidth) {
+    if (
+      !this._isMobile ||
+      store.state.windowWidthLastChangedHeight !== window.innerWidth
+    ) {
       store.commit('setWindowWidthLastChangedHeight', window.innerHeight)
     }
 
