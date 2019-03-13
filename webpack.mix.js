@@ -1,3 +1,11 @@
+mix.options({
+  postCss: [
+    require('autoprefixer')({
+      grid: true
+    })
+  ]
+})
+
 mix.webpackConfig({
   module: {
     rules: [

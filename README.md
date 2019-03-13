@@ -11,5 +11,5 @@ https://github.com/dsktschy/laravel-mix-boilerplate
 
 ## npm install modules
 ```bash
-$ npm i @babel/plugin-proposal-class-properties @babel/preset-env babel-eslint bowser sanitize.css vanix -D
+$ npm i @babel/plugin-proposal-class-properties @babel/preset-env babel-eslint autoprefixer bowser sanitize.css vanix -D
 ```
