@@ -1,0 +1,13 @@
+@mixin font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+@mixin font-roboto-regular {
+  @include font-roboto();
+  font-weight: 400;
+}
+
+@mixin font-roboto-medium {
+  @include font-roboto();
+  font-weight: 500;
+}

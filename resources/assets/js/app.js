@@ -1,6 +1,8 @@
 import { windowSizeObserver } from './module'
-import Lazyload from './views/lazyload'
+import Lazyloader from './views/lazyloader'
+import HeightFitter from './views/height-fitter'
 
 windowSizeObserver.on().resize()
 
-new Lazyload().create().on()
+new Lazyloader().create().on()
+new HeightFitter().update().on()

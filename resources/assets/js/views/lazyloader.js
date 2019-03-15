@@ -1,6 +1,7 @@
 import { loadImage } from '../utils/load'
+import { getBackgroundImages } from '../utils/background-image'
 
-class Lazyload {
+class Lazyloader {
   _selfClassName = ''
   _isLoadedClassName = ''
   _$$el
@@ -12,8 +13,9 @@ class Lazyload {
    */
   static get _defOpts() {
     return {
-      selfClassName: 'js-lazyload',
-      isLoadedClassName: 'is-lazyloaded'
+      selfClassName: 'js-lazyloader',
+      isLoadedClassName: 'is-lazyloaded',
+      isImageSettedClassName: 'is-image-setted'
     }
   }
 
@@ -21,15 +23,18 @@ class Lazyload {
    * @param {Object} [opts]
    * @param {string} [opts.selfClassName]
    * @param {string} [opts.isLoadedClassName]
+   * @param {string} [opts.isImageSettedClassName]
    */
   constructor(opts = {}) {
-    const { selfClassName, isLoadedClassName } = Object.assign(
-      Lazyload._defOpts,
-      opts
-    )
+    const {
+      selfClassName,
+      isLoadedClassName,
+      isImageSettedClassName
+    } = Object.assign(Lazyloader._defOpts, opts)
 
     this._selfClassName = selfClassName
     this._isLoadedClassName = isLoadedClassName
+    this._isImageSettedClassName = isImageSettedClassName
   }
 
   /**
@@ -38,7 +43,7 @@ class Lazyload {
   create() {
     this._$$el = document.getElementsByClassName(this._selfClassName)
     this._observer = new IntersectionObserver(this._inviewport.bind(this), {
-      rootMargin: '50% 0% 50% 0%'
+      rootMargin: '50% 50% 50% 50%'
     })
     return this
   }
@@ -58,9 +63,6 @@ class Lazyload {
    */
   on() {
     for (const $el of Array.from(this._$$el)) {
-      if (!$el.dataset.src) {
-        throw new Error('"data-src" has not been set.')
-      }
       this.add($el)
     }
     return this
@@ -103,12 +105,13 @@ class Lazyload {
 
     for (const { target, isIntersecting } of entries) {
       if (isIntersecting) {
-        this._setSrc(target)
+        target.classList.add(this._isImageSettedClassName)
+        const _srcList = this._setSrcList(target)
         this.remove(target)
 
         loadList.push(() => {
           return (async () => {
-            await loadImage(target.dataset.src)
+            await Promise.all(_srcList.map((src) => loadImage(src)))
             target.classList.add(this._isLoadedClassName)
           })()
         })
@@ -121,21 +124,29 @@ class Lazyload {
   /**
    * @param {Element} $el
    */
-  _setSrc($el) {
+  _setSrcList($el) {
     const _src = $el.dataset.src
+
     // img
     if ($el.src) {
       $el.src = _src
+      return [_src]
     }
     // source
     else if ($el.srcset) {
       $el.srcset = _src
+      return [_src]
     }
+
     // background-image
-    else {
-      $el.style.backgroundImage = _src
+    const _bgImages = getBackgroundImages($el)
+
+    if (0 >= _bgImages.length) {
+      console.error('"data-src" has not been set or Not find background-image.')
     }
+
+    return _bgImages
   }
 }
 
-export { Lazyload as default }
+export { Lazyloader as default }
