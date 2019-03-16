@@ -55,7 +55,7 @@ button {
   outline: none;
 }
 
-.is-pc button:hover {
+.is-desktop button:hover {
   cursor: pointer;
 }
 
@@ -65,4 +65,13 @@ button {
 
 .svg-sprite {
   display: none;
+}
+
+.js-lazyloader {
+  opacity: 0;
+  transition: .4s opacity;
+}
+
+.js-lazyloader.is-lazyloaded {
+  opacity: 1;
 }

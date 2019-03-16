@@ -2,7 +2,6 @@ import { store } from '../store'
 
 class HeightFitter {
   _$$el
-  _windowHeight = 0 // {number} int[0,inf)
 
   /**
    * @return {Object}
@@ -25,7 +24,7 @@ class HeightFitter {
     this._platformType = store.state.platform.type
 
     this._storeStateObject = {
-      windowHeight: () => {
+      windowWidthLastChangedHeight: () => {
         this.update()
       }
     }

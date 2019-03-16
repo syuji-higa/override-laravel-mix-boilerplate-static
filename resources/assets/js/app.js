@@ -1,3 +1,5 @@
+import '@babel/polyfill'
+import 'intersection-observer'
 import ClientFlagSetter from './views/client-flag-setter'
 import { windowSizeObserver } from './module'
 import Lazyloader from './views/lazyloader'

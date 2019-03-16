@@ -1,4 +1,5 @@
-mix.options({
+mix.sass().options({
+  processCssUrls: false,
   postCss: [
     require('autoprefixer')({
       grid: true
