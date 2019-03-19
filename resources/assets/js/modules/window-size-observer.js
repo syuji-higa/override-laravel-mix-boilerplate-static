@@ -1,11 +1,15 @@
+/**
+ * depends on 'vanix' used in '../store'
+ */
+
 import { store } from '../store'
-import { eventer } from '../module'
+import { eventer } from './module'
 import { debounce } from '../utils/debounce'
 
 class WindowSizeObserver {
-  _isMobile = false
-  _resizeDebounce // {function}
-  _resizeEvent = {}
+  _isMobile /* :boolane */ = false
+  _resizeDebounce /* :function */
+  _resizeEvent /* :Object */ = {}
 
   constructor() {
     this._isMobile = !!store.state.platform.type.match(/^mobile$/)

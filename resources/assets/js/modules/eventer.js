@@ -1,21 +1,21 @@
 import { createEvent } from '../utils/event'
 
 class Eventer {
-  _events = [] // {Array<Object>}
+  _events /* Object[] */ = []
 
   /**
    * @param {Element} target
    * @param {string} eventType
    * @param {function} listener
-   * @param {boolean|Object} [opt]
+   * @param {boolean|Object} [option]
    * @return {Object}
    * @property {functon} add
    * @property {functon} remove
    */
-  create(target, eventType, listener, opt = false) {
+  create(target, eventType, listener, option = false) {
     return {
       add: () => {
-        this.add(target, eventType, listener, opt)
+        this.add(target, eventType, listener, option)
       },
       remove: () => {
         this.remove(target, eventType, listener)
@@ -27,17 +27,17 @@ class Eventer {
    * @param {Element} target
    * @param {string} eventType
    * @param {function} listener
-   * @param {boolean|Object} [opt]
+   * @param {boolean|Object} [option]
    * @return {Instance}
    */
-  add(target, eventType, listener, opt = false) {
-    let _hasEvent = false
+  add(target, eventType, listener, option = false) {
+    let _hasEvent /* :boolean */ = false
 
-    for (const e of this._events) {
+    for (const e /* :Object */ of this._events) {
       if (
         target === e.target &&
         eventType === e.eventType &&
-        opt === e.opt &&
+        option === e.option &&
         !e.listeners.includes(listener)
       ) {
         e.listeners.push(listener)
@@ -47,13 +47,13 @@ class Eventer {
     }
 
     if (!_hasEvent) {
-      const _listeners = [listener]
+      const _listeners /* :function[] */ = [listener]
       this._events.push({
         target,
         eventType,
-        opt,
+        option,
         listeners: _listeners,
-        event: this._addEvent(target, eventType, _listeners, opt)
+        event: this._addEvent(target, eventType, _listeners, option)
       })
     }
 
@@ -67,7 +67,7 @@ class Eventer {
    * @return {Instance}
    */
   remove(target, eventType, listener) {
-    this._events.forEach((e, i) => {
+    this._events.forEach((e /* :Object */, i /* :number int[0,inf) */) => {
       if (
         target === e.target &&
         eventType === e.eventType &&
@@ -87,20 +87,22 @@ class Eventer {
   /**
    * @param {Element} target
    * @param {string} eventType
-   * @param {Array<function>} listeners
-   * @param {boolean|Object} opt
-   * @return {Instance}
+   * @param {function[]} listeners
+   * @param {boolean|Object} option
+   * @return {Object}
+   * @property {function} add
+   * @property {function} remove
    */
-  _addEvent(target, eventType, listeners, opt) {
+  _addEvent(target, eventType, listeners, option) {
     const _event = createEvent(
       target,
       eventType,
-      (e) => {
-        for (const listener of listeners) {
+      (e /* :Event */) => {
+        for (const listener /* :function */ of listeners) {
           listener(e)
         }
       },
-      opt
+      option
     )
     _event.add()
     return _event

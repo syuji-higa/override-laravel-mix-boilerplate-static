@@ -1,7 +1,13 @@
+/**
+ * depends on 'vanix' used in '../store'
+ */
+
 import { store } from '../store'
 
 class HeightFitter {
-  _$$el
+  _$$el /* :HTMLCollection|NodeList */
+  _platformType /* :string */ = ''
+  _storeStateObject /* :Object */ = {}
 
   /**
    * @return {Object}
@@ -24,7 +30,7 @@ class HeightFitter {
     this._platformType = store.state.platform.type
 
     this._storeStateObject = {
-      windowWidthLastChangedHeight: () => {
+      setWindowWidthLastChangedHeight: () => {
         this.update()
       }
     }
@@ -50,12 +56,15 @@ class HeightFitter {
    * @return {Instance}
    */
   update() {
-    const _height = store.state.windowWidthLastChangedHeight
+    const _height /* :number int[0,inf) */ =
+      store.state.windowWidthLastChangedHeight
 
-    Array.from(this._$$el, ($el) => {
-      if (this._platformType === $el.dataset.heightFitterIgnore) return
+    for (const $el /* :Element */ of Array.from(this._$$el)) {
+      if (this._platformType === $el.dataset.heightFitterIgnore) {
+        continue
+      }
       $el.style.height = `${_height}px`
-    })
+    }
 
     return this
   }

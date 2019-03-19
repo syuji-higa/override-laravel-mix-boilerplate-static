@@ -1,39 +1,47 @@
+/**
+ * depends on 'vanix'
+ * depends on 'bowser'
+ */
+
 import Vanix from 'vanix'
 import Bowser from 'bowser'
 
 // bowser
-const bowser = Bowser.getParser(window.navigator.userAgent)
+const bowser /* :Object */ = Bowser.getParser(window.navigator.userAgent)
 const { browser, engin, os, platform } = bowser.parsedResult
 
-const state = {
-  browser,
-  engin,
-  os,
-  platform,
-  breakPoint: [768, 1024],
-  windowWidth: 0,
-  windowHeight: 0,
-  windowWidthLastChangedHeight: 0,
-  windowSizeType: ''
+const state /* :Object */ = {
+  browser /* :Object */,
+  engin /* :Object */,
+  os /* :Object */,
+  platform /* :Object */,
+  breakPoint /* :number[] int[0,inf) */: [768, 1024],
+  windowWidth /* :number[] int[0,inf) */: 0,
+  windowHeight /* :number[] int[0,inf) */: 0,
+  windowWidthLastChangedHeight /* :number[] int[0,inf) */: 0,
+  windowSizeType /* :string */: ''
 }
 
-const mutations = {
-  setWindowWidth(state, data) {
+const mutations /* :Object */ = {
+  setWindowWidth(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowWidth = data
   },
-  setWindowHeight(state, data) {
+  setWindowHeight(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowHeight = data
   },
-  setWindowWidthLastChangedHeight(state, data) {
+  setWindowWidthLastChangedHeight(
+    state /* :Object */,
+    data /* :number[] int[0,inf) */
+  ) {
     state.windowWidthLastChangedHeight = data
   },
-  setWindowSizeType(state, data) {
+  setWindowSizeType(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowSizeType = data
   }
 }
 
-const actions = {}
+const actions /* :Object */ = {}
 
-const vanix = new Vanix({ state, mutations, actions })
+const vanix /* :Instance */ = new Vanix({ state, mutations, actions })
 
-export const store = vanix.create()
+export const store /* :Object */ = vanix.create()

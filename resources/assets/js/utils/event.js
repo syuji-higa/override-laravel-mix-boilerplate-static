@@ -1,9 +1,5 @@
 /**
- * event
- */
-
-/**
- * @param {Window|Element} target
+ * @param {Element} target
  * @param {string} eventType
  * @param {function} listener
  * @param {boolean|Object} [option]
@@ -25,7 +21,7 @@ export const createEvent = (target, eventType, listener, option = false) => {
 
 /**
  * @param {Array} options
- * @param {Window|Element} options[0] - dispatc target
+ * @param {Element} options[0] - dispatc target
  * @param {string} options[1] - eventType
  * @param {Object} [options[2]] - event detail
  * @param {Event} event
@@ -36,8 +32,8 @@ export const createEvent = (target, eventType, listener, option = false) => {
 export const onDispatchEvent = (options, event) => {
   const [target, eventType, detail] = options
 
-  const _detail = (() => {
-    const _obj = {
+  const _detail /* :Object */ = (() => {
+    const _obj /* :Object */ = {
       status: event
     }
     if (detail) Object.assign(_obj, detail)

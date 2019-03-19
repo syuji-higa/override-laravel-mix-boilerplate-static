@@ -2,11 +2,12 @@ import { loadImage } from '../utils/load'
 import { getBackgroundImages } from '../utils/background-image'
 
 class Lazyloader {
-  _selfClassName = ''
-  _isLoadedClassName = ''
-  _$$el
-  _observer // IntersectionObserver
-  _targets = new Set()
+  _selfClassName /* :string */ = ''
+  _isLoadedClassName /* :string */ = ''
+  _isImageSettedClassName /* :string */ = ''
+  _$$el /* :HTMLCollection|NodeList */
+  _observer /* :IntersectionObserver */
+  _targets /* :Set */ = new Set()
 
   /**
    * @return {Object}
@@ -62,7 +63,7 @@ class Lazyloader {
    * @return {Instance}
    */
   on() {
-    for (const $el of Array.from(this._$$el)) {
+    for (const $el /* :Element */ of Array.from(this._$$el)) {
       this.add($el)
     }
     return this
@@ -72,7 +73,7 @@ class Lazyloader {
    * @return {Instance}
    */
   off() {
-    this._targets.forEach(($el) => {
+    this._targets.forEach(($el /* :Element */) => {
       this.remove($el)
     })
     return this
@@ -106,7 +107,7 @@ class Lazyloader {
     for (const { target, isIntersecting } of entries) {
       if (isIntersecting) {
         target.classList.add(this._isImageSettedClassName)
-        const _srcList = this._setSrcList(target)
+        const _srcList /* :string[] */ = this._setSrcList(target)
         this.remove(target)
 
         loadList.push(() => {
@@ -118,14 +119,14 @@ class Lazyloader {
       }
     }
 
-    await Promise.all(loadList.map((load) => load()))
+    await Promise.all(loadList.map((load /* :function */) => load()))
   }
 
   /**
    * @param {Element} $el
    */
   _setSrcList($el) {
-    const _src = $el.dataset.src
+    const _src /* :string */ = $el.dataset.src
 
     // img
     if ($el.src) {
@@ -139,10 +140,12 @@ class Lazyloader {
     }
 
     // background-image
-    const _bgImages = getBackgroundImages($el)
+    const _bgImages /* string[] */ = getBackgroundImages($el)
 
     if (0 >= _bgImages.length) {
-      console.error('"data-src" has not been set or Not find background-image.')
+      console.warn(
+        '"data-src" has not been set or Not find background-image, for lazyloader.'
+      )
     }
 
     return _bgImages
