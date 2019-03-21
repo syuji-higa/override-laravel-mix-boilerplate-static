@@ -1,12 +1,9 @@
-@mixin placeholder($width, $height) {
+@mixin placeholder($width, $height, $bg-color: transparent) {
   &::after {
     content: "";
     display: block;
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     padding-top: $height / $width * 100%;
-    background-color: #eee;
+    background-color: $bg-color;
   }
 }

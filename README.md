@@ -6,6 +6,7 @@ https://github.com/dsktschy/laravel-mix-boilerplate
 - .gitignore
 - .stylelintrc.js
 - webpack.mix.js
+- views/variables.json
 
 ## not merge files
 - README.md

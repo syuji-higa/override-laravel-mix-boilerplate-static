@@ -1,0 +1,6 @@
+{
+  "general": {
+    "imagePath": "./assets/images",
+    "svgPath": "./assets/svg"
+  }
+}

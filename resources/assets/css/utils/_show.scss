@@ -1,0 +1,54 @@
+.u-show-pl {
+  @include media-screen-pl {
+    display: block;
+  }
+  @include media-screen-mo {
+    display: none;
+  }
+}
+.u-show-pc {
+  @include media-screen-pc {
+    display: block;
+  }
+  @include media-screen-sp {
+    display: none;
+  }
+}
+.u-show-ps {
+  @include media-screen-pl {
+    display: none;
+  }
+  @include media-screen-mo {
+    display: block;
+  }
+  @include media-screen-sp {
+    display: none;
+  }
+}
+.u-show-mo {
+  @include media-screen-pc {
+    display: none;
+  }
+  @include media-screen-mo {
+    display: block;
+  }
+}
+.u-show-sp {
+  @include media-screen-pc {
+    display: none;
+  }
+  @include media-screen-sp {
+    display: block;
+  }
+}
+.u-show-tb {
+  @include media-screen-pc {
+    display: none;
+  }
+  @include media-screen-sp {
+    display: none;
+  }
+  @include media-screen-tb {
+    display: block;
+  }
+}

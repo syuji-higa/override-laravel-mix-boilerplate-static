@@ -1,0 +1,65 @@
+mixin img(path, alt = '')
+  - const imageDir = seed.variables.general.imagePath
+  img(src=mix(join(imageDir, path)) alt=alt)
+
+mixin lazy-img(path, alt = '')
+  -
+    const imageDir = seed.variables.general.imagePath
+    const imgPath = join(imageDir, path)
+  img.js-lazyloader(
+    src=mix(join(imageDir, 'placeholder.png'))
+    data-src=mix(imgPath)
+    alt=alt
+  )
+  - if (alt !== '')
+    noscript
+      img(src=mix(imgPath) alt=alt)
+
+mixin picture(path, alt = '', options = {})
+  -
+    const imageDir = seed.variables.general.imagePath
+    const { suffixPc, suffixSp } = Object.assign({
+      suffixPc: '-pc',
+      suffixSp: '-sp'
+    }, options)
+    const [fileName, ext] = path.split('.')
+    const pathPc = join(imageDir, `${fileName}${suffixPc}.${ext}`)
+    const pathSp = join(imageDir, `${fileName}${suffixSp}.${ext}`)
+  picture
+    source(srcset=mix(pathPc) media=`(min-width: 768px)`)
+    source(srcset=mix(pathSp) media="(max-width: 767.9px)")
+    img(src=mix(pathPc) alt=alt)
+
+mixin lazy-picture(path, alt = '', options = {})
+  -
+    const imageDir = seed.variables.general.imagePath
+    const { suffixPc, suffixSp } = Object.assign({
+      suffixPc: '-pc',
+      suffixSp: '-sp'
+    }, options)
+    const [fileName, ext] = path.split('.')
+    const pathPc = join(imageDir, `${fileName}${suffixPc}.${ext}`)
+    const pathSp = join(imageDir, `${fileName}${suffixSp}.${ext}`)
+    const placeholderPath = join(imageDir, 'placeholder.png')
+  picture
+    source.js-lazyloader(
+      srcset=mix(placeholderPath)
+      data-src=mix(pathPc)
+      media=`(min-width: 768px)`
+    )
+    source.js-lazyloader(
+      srcset=mix(placeholderPath)
+      data-src=mix(pathSp)
+      media="(max-width: 767.9px)"
+    )
+    img.js-lazyloader(src=mix(placeholderPath) data-src=mix(pathPc) alt=alt)
+  - if (alt !== '')
+    noscript
+      img(src=mix(pathPc) alt=alt)
+
+mixin svg(id, title = '')
+  - const svgPath = join(seed.variables.general.svgPath, 'sprite.svg')
+  svg
+    if title !== ''
+      title #{title}
+    use(xlink:href=svgSprite(svgPath, `#sprite-${id}`))
