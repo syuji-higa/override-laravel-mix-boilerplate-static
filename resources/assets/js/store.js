@@ -16,13 +16,19 @@ const state /* :Object */ = {
   os /* :Object */,
   platform /* :Object */,
   breakPoint /* :number[] int[0,inf) */: [768, 1024],
+  pageLoaded /* :boolean */: false,
   windowWidth /* :number[] int[0,inf) */: 0,
   windowHeight /* :number[] int[0,inf) */: 0,
   windowWidthLastChangedHeight /* :number[] int[0,inf) */: 0,
-  windowSizeType /* :string */: ''
+  windowSizeType /* :string */: '',
+  windowOffsetX /* :number[] int[0,inf) */: 0,
+  windowOffsetY /* :number[] int[0,inf) */: 0
 }
 
 const mutations /* :Object */ = {
+  setPageLoaded(state /* :Object */, data /* :boolean */) {
+    state.pageLoaded = data
+  },
   setWindowWidth(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowWidth = data
   },
@@ -37,6 +43,12 @@ const mutations /* :Object */ = {
   },
   setWindowSizeType(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowSizeType = data
+  },
+  setWindowOffsetX(state /* :Object */, data /* :number[] int[0,inf) */) {
+    state.windowOffsetX = data
+  },
+  setWindowOffsetY(state /* :Object */, data /* :number[] int[0,inf) */) {
+    state.windowOffsetY = data
   }
 }
 
