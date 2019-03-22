@@ -1,6 +1,6 @@
-class Inviewporter {
+class Ignitioner {
   _selfClassName /* :string */ = ''
-  _isInviewportClassName /* :string */ = ''
+  _isIgnitedClassName /* :string */ = ''
   _$$el /* :HTMLCollection|NodeList */
   _observer /* :IntersectionObserver */
   _targets /* :Set */ = new Set()
@@ -10,8 +10,8 @@ class Inviewporter {
    */
   static get _defOptions() {
     return {
-      selfClassName: 'js-inviewporter',
-      isInviewportClassName: 'is-inviewport'
+      selfClassName: 'js-ignitioner',
+      isIgnitedClassName: 'is-ignited'
     }
   }
 
@@ -21,13 +21,13 @@ class Inviewporter {
    * @param {string} [options.isLoadedClassName]
    */
   constructor(options = {}) {
-    const { selfClassName, isInviewportClassName } = Object.assign(
-      Inviewporter._defOptions,
+    const { selfClassName, isIgnitedClassName } = Object.assign(
+      Ignitioner._defOptions,
       options
     )
 
     this._selfClassName = selfClassName
-    this._isInviewportClassName = isInviewportClassName
+    this._isIgnitedClassName = isIgnitedClassName
   }
 
   /**
@@ -35,7 +35,9 @@ class Inviewporter {
    */
   create() {
     this._$$el = document.getElementsByClassName(this._selfClassName)
-    this._observer = new IntersectionObserver(this._inviewporter.bind(this))
+    this._observer = new IntersectionObserver(this._Ignitioner.bind(this), {
+      rootMargin: '-10% 0% -10% 0%'
+    })
     return this
   }
 
@@ -90,18 +92,17 @@ class Inviewporter {
   /**
    * @param {Array<IntersectionObserverEntry>} entries
    */
-  _inviewporter(entries) {
+  _Ignitioner(entries) {
     for (const {
       target /* :Element */,
       isIntersecting /* :boolean */
     } of entries) {
       if (isIntersecting) {
-        target.classList.add(this._isInviewportClassName)
-      } else {
-        target.classList.remove(this._isInviewportClassName)
+        target.classList.add(this._isIgnitedClassName)
+        this.remove(target)
       }
     }
   }
 }
 
-export { Inviewporter as default }
+export { Ignitioner as default }

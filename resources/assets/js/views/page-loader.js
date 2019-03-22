@@ -2,7 +2,6 @@
  * depends on 'vanix' used in '../store'
  */
 
-import { store } from '../store'
 import { imagePreloader } from '../module'
 
 class PageLoader {
@@ -64,7 +63,7 @@ class PageLoader {
       return
     }
     document.documentElement.classList.add(this._isPageLoadedClassName)
-    store.commit('setPageLoaded', true)
+    document.dispatchEvent(new CustomEvent('pageLoaded'))
   }
 }
 

@@ -16,7 +16,6 @@ const state /* :Object */ = {
   os /* :Object */,
   platform /* :Object */,
   breakPoint /* :number[] int[0,inf) */: [768, 1024],
-  pageLoaded /* :boolean */: false,
   windowWidth /* :number[] int[0,inf) */: 0,
   windowHeight /* :number[] int[0,inf) */: 0,
   windowWidthLastChangedHeight /* :number[] int[0,inf) */: 0,
@@ -26,9 +25,6 @@ const state /* :Object */ = {
 }
 
 const mutations /* :Object */ = {
-  setPageLoaded(state /* :Object */, data /* :boolean */) {
-    state.pageLoaded = data
-  },
   setWindowWidth(state /* :Object */, data /* :number[] int[0,inf) */) {
     state.windowWidth = data
   },
