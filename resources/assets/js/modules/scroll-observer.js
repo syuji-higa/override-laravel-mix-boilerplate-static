@@ -3,7 +3,7 @@
  */
 
 import { store } from '../store'
-import { eventer } from '../module'
+import { eventer } from '../modules'
 import { throttle } from '../utils/throttle'
 
 class ScrollObserver {

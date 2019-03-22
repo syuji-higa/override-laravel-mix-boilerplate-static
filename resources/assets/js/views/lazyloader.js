@@ -43,7 +43,7 @@ class Lazyloader {
    */
   create() {
     this._$$el = document.getElementsByClassName(this._selfClassName)
-    this._observer = new IntersectionObserver(this._inviewport.bind(this), {
+    this._observer = new IntersectionObserver(this._update.bind(this), {
       rootMargin: '-10% 0% -10% 0%'
     })
     return this
@@ -80,6 +80,7 @@ class Lazyloader {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   add($el) {
@@ -89,6 +90,7 @@ class Lazyloader {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   remove($el) {
@@ -101,7 +103,7 @@ class Lazyloader {
    * @param {Array<IntersectionObserverEntry>} entries
    * @return {Promise}
    */
-  async _inviewport(entries) {
+  async _update(entries) {
     const loadList /* :function[] */ = []
 
     for (const {

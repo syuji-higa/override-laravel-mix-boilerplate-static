@@ -35,7 +35,7 @@ class Ignitioner {
    */
   create() {
     this._$$el = document.getElementsByClassName(this._selfClassName)
-    this._observer = new IntersectionObserver(this._Ignitioner.bind(this), {
+    this._observer = new IntersectionObserver(this._update.bind(this), {
       rootMargin: '-10% 0% -10% 0%'
     })
     return this
@@ -72,6 +72,7 @@ class Ignitioner {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   add($el) {
@@ -81,6 +82,7 @@ class Ignitioner {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   remove($el) {
@@ -92,7 +94,7 @@ class Ignitioner {
   /**
    * @param {Array<IntersectionObserverEntry>} entries
    */
-  _Ignitioner(entries) {
+  _update(entries) {
     for (const {
       target /* :Element */,
       isIntersecting /* :boolean */

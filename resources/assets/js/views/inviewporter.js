@@ -35,7 +35,7 @@ class Inviewporter {
    */
   create() {
     this._$$el = document.getElementsByClassName(this._selfClassName)
-    this._observer = new IntersectionObserver(this._inviewporter.bind(this))
+    this._observer = new IntersectionObserver(this._upate.bind(this))
     return this
   }
 
@@ -70,6 +70,7 @@ class Inviewporter {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   add($el) {
@@ -79,6 +80,7 @@ class Inviewporter {
   }
 
   /**
+   * @param {Element} $el
    * @return {Instance}
    */
   remove($el) {
@@ -90,7 +92,7 @@ class Inviewporter {
   /**
    * @param {Array<IntersectionObserverEntry>} entries
    */
-  _inviewporter(entries) {
+  _upate(entries) {
     for (const {
       target /* :Element */,
       isIntersecting /* :boolean */

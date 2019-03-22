@@ -2,7 +2,7 @@
  * depends on 'vanix' used in '../store'
  */
 
-import { imagePreloader } from '../module'
+import { imagePreloader } from '../modules'
 
 class PageLoader {
   _isWindowLoaded /* :boolean */ = false
