@@ -39,3 +39,14 @@ mix
       ]
     }
   })
+
+if (process.env.NODE_ENV !== 'development') {
+  mix.then(async () => {
+    // In production, delete chunk file for SVG sprite
+    fs.removeSync(`${publicDirName}/${svgDummyModuleName}.js`)
+    const pathToManifest = `${publicDirName}/mix-manifest.json`
+    const manifest = require(`./${pathToManifest}`)
+    delete manifest[`/${svgDummyModuleName}.js`]
+    fs.writeFileSync(path.resolve(pathToManifest), JSON.stringify(manifest), 'utf-8')
+  })
+}
