@@ -4,8 +4,9 @@ import ClientFlagSetter from './views/client-flag-setter'
 import objectFitImages from 'object-fit-images'
 import {
   windowSizeObserver,
-  scrollObserver,
-  inviewportObserver
+  // scrollObserver,
+  inviewportObserver,
+  inviewportScrollObserver
 } from './modules'
 import PageLoader from './views/page-loader'
 import Lazyloader from './views/lazyloader'
@@ -19,8 +20,9 @@ new ClientFlagSetter()
 objectFitImages()
 
 windowSizeObserver.on().update()
-scrollObserver.on().update()
+// scrollObserver.add(window) // always scroll observe
 inviewportObserver.create()
+inviewportScrollObserver.on()
 
 new HeightFitter().update().on()
 
