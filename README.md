@@ -11,6 +11,11 @@ https://github.com/dsktschy/laravel-mix-boilerplate/tree/static
 ## not merge files
 - README.md
 
+## copy assets files
+https://github.com/syuji-higa/override-laravel-mix-boilerplate-assets
+
+assets/ -> resources/assets/
+
 ## copy JavaScript files
 https://github.com/syuji-higa/javascript-modules-v5
 
@@ -38,6 +43,6 @@ src/ -> resources/assets/js/
 
 ## npm install modules
 ```bash
-$ npm i @babel/plugin-proposal-class-properties @babel/preset-env babel-eslint autoprefixer bowser sanitize.css vanix -D
+$ npm i @babel/plugin-proposal-class-properties @babel/preset-env babel-eslint autoprefixer intersection-observer custom-event-polyfill bowser sanitize.css vanix -D
 $ npm i @babel/polyfill -S
 ```

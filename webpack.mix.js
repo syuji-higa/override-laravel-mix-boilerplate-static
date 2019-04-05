@@ -40,13 +40,13 @@ mix
     }
   })
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV === 'production') {
   mix.then(async () => {
+    const targets = globby.sync(
+      'public/assets/images/**/*.{jpg,jpeg,png,gif.ico}'
+    )
     // In production, delete chunk file for SVG sprite
-    fs.removeSync(`${publicDirName}/${svgDummyModuleName}.js`)
-    const pathToManifest = `${publicDirName}/mix-manifest.json`
-    const manifest = require(`./${pathToManifest}`)
-    delete manifest[`/${svgDummyModuleName}.js`]
-    fs.writeFileSync(path.resolve(pathToManifest), JSON.stringify(manifest), 'utf-8')
+    fs.removeSync(`public/${svgDummyModuleName}.js`)
+    fs.removeSync(`public/mix-manifest.json`)
   })
 }
