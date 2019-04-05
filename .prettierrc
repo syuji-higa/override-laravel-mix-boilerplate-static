@@ -1,7 +1,7 @@
 # .prettierrc
 
 overrides:
-- files: "*.js"
+- files: [".*.js","*.js"]
   options:
     semi: false
     singleQuote: true
