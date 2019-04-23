@@ -7,8 +7,14 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? ['error', {
-      'allow': ['warn', 'error']
-    }] : 'off'
+    'no-console':
+      process.env.NODE_ENV === 'production'
+        ? [
+            'error',
+            {
+              allow: ['warn', 'error']
+            }
+          ]
+        : 'off'
   }
 }

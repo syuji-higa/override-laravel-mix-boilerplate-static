@@ -41,18 +41,18 @@ mixin lazy-picture(path, alt = '', options = {})
     const pathPc = join(imageDir, `${fileName}${suffixPc}.${ext}`)
     const pathSp = join(imageDir, `${fileName}${suffixSp}.${ext}`)
     const placeholderPath = join(imageDir, 'placeholder.png')
-  picture
-    source.js-lazyloader(
+  picture.js-lazyloader
+    source(
       srcset=mix(placeholderPath)
       data-src=mix(pathPc)
       media=`(min-width: 768px)`
     )
-    source.js-lazyloader(
+    source(
       srcset=mix(placeholderPath)
       data-src=mix(pathSp)
       media="(max-width: 767.9px)"
     )
-    img.js-lazyloader(src=mix(placeholderPath) data-src=mix(pathPc) alt=alt)
+    img(src=mix(placeholderPath) data-src=mix(pathPc) alt=alt)
   - if (alt !== '')
     noscript
       img(src=mix(pathPc) alt=alt)
