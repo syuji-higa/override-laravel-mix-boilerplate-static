@@ -1,7 +1,17 @@
 module.exports = function(api) {
   api.cache(true)
 
-  const presets = ['@babel/preset-env']
+  const presets = [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          ie: 11
+        },
+        useBuiltIns: 'entry'
+      }
+    ]
+  ]
   const plugins = ['@babel/plugin-proposal-class-properties']
 
   return {
